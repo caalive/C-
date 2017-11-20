@@ -1,0 +1,29 @@
+第四节 字符串和数组
+
+1.数组的声明和使用
+   数组是一族元素的集合,且元素的类型相同,在C++中数组能够在内存中存储
+   一组连续的有序元素(渣翻)
+   静态数组定义:
+       vraiabletype variablename [constnumber] = {0}
+          变量类型      变量名      元素个数    初始化为 0
+        ElementType ArrayName [constant_number of elements] = {optional initial values}
+        int myNumbers [5] = {}; 编译器默认初始化数组元素为0
+        int myNumbers [5] = {1, 2} 剩下的元素会被初始化为0
+    还可以定义一个常量:
+        const int ARRAY_LENGTH = 5;
+        int myNumbers [ARRAY_LENGTH] = {34, 35, -21, 5002, 365}
+    还可以不指定数组长度,只设置数组元素,编译器会根据数组元素个数来确定数组长度:
+    int myNumbers [] = {1,2,3} 数组长度为3
+
+
+动态数组:
+    使用动态数组需要包含 vector 头文件
+    使用时: vector(ElementType) ArrayName(ARRAY_LENGTH)
+
+2.字符数组的创建和使用
+    字符数组需要包含尾 '\0' 结束符
+    在声明了一个字符数组后,在数组中间插入尾0不会使数组的大小发生改变,如果输出
+    字符数组,则只会输出尾0前面的字符.
+
+
+3.std::string 简介
