@@ -1,0 +1,103 @@
+lesson8 第 8 节 指针 和 引用
+
+1. 指针是什么
+    指针也是一个变量和 int 类型一样, int 类型的变量可以存储一个整数,而指针是用来存储一个内存地址的. 指针是指向内存中某个位置的特殊变量.
+    指针的声明:
+            PointedType * PointerVariableName;
+            指针类型    *  指针变量名
+    在声明完一个指针变量时要对其进行初始化操作,不然这个指针变量就会指向一个不可预知的随机内存地址.如果使用该未初始化的指针会带来不可预知的后果,会引起应用程序的崩溃.
+    int *pointsToInt = NULL;
+    
+    使用  & 引用操作符 可以获取一个变量的内存地址
+    使用  * 解引用操作符 可以获取一个指针指向的内存地址的数据
+    解引用操作符也被称为 间接操作符
+
+    变量可以使用关键字const来限定其值不可修改同样的指针也可以使用const来限定其指向不可修改其值可修改,指向可修改其值不可修改, 指向和值都不可修改
+    
+    常量指针
+        常量指针是使用 const int* pointers 这种定义形式 等同于 int const *pointers
+        特点是:指向可修改,指向的值不可修改
+
+    指针常量
+        指针常量是使用 int* const pointer 这种定义形式
+        特点是:指向不可修改,指向的值可修改
+
+    上述二者的组合 常量指针,指针常量 定义形式是: const int * const pointers
+        特点是:指向不可修改指向的值不可修改
+
+    判断指针属于上述哪种类型需要规范两点:
+        一是平时的书写格式 在定义指针时 * 星号要紧跟在 类型后面如: int* variableName
+        二是const的书写位置 按照从左向右读的顺序:
+        const int* pointer 是常量指针
+        int* const pointer 指针常量
+        const int* const pointer 是常量指针加指针常量 意味着 指针指向不可变指针指向值不可变
+        要规范书写方式不然在实际使用用 极易混淆
+
+2. 如何使用操作符 new 和 delete 去 申请内存和释放内存
+    使用new操作符申请内存的语法
+    Type* Pointer  = new Type
+    Type* Pointer =  new[numElements]
+
+    int* pointToInt = new int
+    int* pointToNums = new int[10]
+
+    使用delete释放内存的语法
+    Type* Pointer = new Type
+    delete Pointer
+
+    Type* Pointer = new Type[numElements]
+    delete[] Pointer 释放申请的内存块
+
+3. 如何使用指针编写稳定程序和动态分配内存
+    编写程序时,特别是需要动态分配内存的程序时,分配完内存后要对返回的指针进行检查
+    使用 try{} catch {} 语句来检查,返回的指针是否合法.是否分配成功
+    try
+    {
+        int* pointToManyMemory = new [0x1fffffff];
+        delete[] pointToManyMemory;
+    }
+    catch(bad_alloc)  // 使用 bad_alloc 来检查内存是否分配成功
+    {
+        cout << "Memory allocation failed.";
+    }
+    或者 使用 new(nothrow) 来测试返回的地址是否为NULL
+    
+    int* pointsToManyNums = new(nothrow) int [0x1fffff];
+    if(pointsToManyNums)
+    {
+        // Do something 
+        delete[] pointsToManyNums;
+    }
+    else
+    {
+        cout << "Memory allocation failed.";
+    }
+    
+    使用指针时的几点注意事项:
+        1. 在声明指针的同时初始化指针变量 int* pointers = NULL;
+        2. 在使用指针时保证该指针访问的是一个合法的内存地址
+        3. 记得在使用 new 关键字申请内存后,使用delete释放申请的内存块, 否则会引起内存泄漏和系统性能降低
+        4. 不要访问使用delete释放后的内存块
+        5. 不要重复使用delete释放内存
+        6. 在使用 new 分配内存时,不想使用 try catch 语句 可以使用 new(nothrow) 来替代
+
+4. 什么是引用
+    引用就是一个变量的别名
+    当声明一个引用时就要对这个引用进行初始化赋值操作
+    形如: 
+        VarType original = Value;
+        VarType& ReferenceVariable = original;
+    指针在函数调用时特别有用,当给函数传入参数时,传入的是一份拷贝,当使用引用时传递的就是地址了
+    当传入一个数组时 使用引用能节省大量内存.
+    使用引用常量 const
+    const VarType& variableName;
+    
+5. 指针和引用的区别
+    引用常量的作用和常量指针有一些相同之处 就是被引用的值不能被改变了,但是常量指针可以指向其它的变量
+    而引用不可以, 定义引用时必须初始化这个引用
+    常引用不可以被用作左值
+6. 什么时候使用指针什么时候使用引用
+7. 总结:
+    第7节学习了指针和引用的方法通过使用指针来操作分配的内存
+    学习了操作符 new 和 delete的使用方法
+    练习了关于上述的一些例子
