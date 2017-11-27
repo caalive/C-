@@ -1,0 +1,85 @@
+lesson9 第9节 类和对象
+
+1. 什么是类和对象
+    类是对某些事物的一个抽象,对象是类的实例化表现
+    定义一个类使用关键字 class 后面跟上类的名字 然后 由一对 {}将该类的一些属性和方法包裹起来,最后再加上一个分号 ; 一个类就定义完成了.
+    class className{some data; some function};
+    定义一个人的类
+    class Human
+    {
+        // Menber attributes:
+        string name;
+        string dateOfBirth;
+        string placeofBirth;
+        string gender;
+
+        //Member functions:
+        void Talk(string textToTalk)
+        void IntroduceSelf();
+    };
+    
+    在上述定义的类中: name, dateOfBirth, placeofBirth, gender 被称为类的属性
+    而 Talk, IntroduceSelf 被称为类的方法.或者说叫成员函数
+    
+    对象是类的实例化,使用对象可以访问类内定义的属性和方法.
+    访问类的成员是用 . dot 操作符
+    
+    使用指针指向操作符 -> 来访问类的属性和方法
+
+    Human* firstWoman = new Human();
+    firstWoman->dateOfBirth = "1970";
+    firstWoman->IntroduceSelf();
+    delete firstWoman;
+
+    关键字 public 和 private
+
+    使用 public 修饰的 成员变量和成员函数 可以在类外被类实例随意访问
+    使用 private修饰的 成员变量和成员函数 只能由类内的成员变量和函数访问到,类实例无法访问.
+    类可以使用上述的关键字来控制哪些成员是暴露的,哪些是隐藏的对于类的实例来说.
+    如果访问被private修饰的成员将引发编译错误.
+
+2. 类如何将数据和功能整合在一起
+3. 关于构造函数 拷贝构造函数 和 析构函数
+    构造函数是一个特殊的函数在类构造实例的时候被调用, 和普通函数一样构造函数可以被重载
+    构造函数名和类名相同而且没有返回值
+    形如:
+        class Huma 
+        {
+            public:
+            Human(); // declaration fo constructor
+             or 
+            Human()
+            {
+                // constructor code here 
+            }
+
+        };
+
+    什么时候或者说如何使用构造函数
+        构造函数总是在类实例被创建的时候被调用,在构造函数中可以给类成员变量赋初始值,可以初始化一些你想要初始化的值.
+    构造函数不带任何参数的时候被称为默认构造函数,在编程时默认构造函数时可选的,也就是说在定义类时可以选择不实现构造函数.
+    如果不实现构造函数,编译器在编译时会默认帮你加上一个缺省的构造函数
+
+    在一个类中可以同时写无参的和有参的构造函数
+
+    在构造函数中可以写成构造参数列表的形式,就是给类成员变量指定构造初始值
+    如:
+        class Human
+        {
+            private:
+                string name;
+                int age;
+            Human(string humansName, int humansAge)
+                :name(humansName), age(humansAge)
+            {
+                cout << "Constroduced a human called " << name;
+                cout << ", "<< age << " years old" << endl;
+            }
+        };
+        
+        初始化参数列表的特征是使用一个冒号:后面紧跟着需要初始化的成员变量名然后是括号内的初始化值 
+        初始化参数列表在调用基类的指定构造函数内的参数时很有用
+4. 面向对象的封装和抽象
+5. this 指针的作用
+6. struct 和 class 的区别
+
