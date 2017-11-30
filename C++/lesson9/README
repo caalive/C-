@@ -118,4 +118,12 @@ lesson9 第9节 类和对象
 4. 面向对象的封装和抽象
 5. this 指针的作用
 6. struct 和 class 的区别
+    struct 是 C和C++中关键字.在C中struct和C++中的class类似.只是C++中的class提供了更加丰富的功能.如访问控制和数据函数封装.
+在struct中所有变量都是公开的,在class中如果不加关键字修饰 public private protected , 默认变量和函数都是私有的.
 
+7.友元函数和友元类
+    将一个函数在被访问的类中声明为友元函数,该函数就可以在类外部访问该类中定义的私有变量,友元类的作用和友元函数相同,假设在A类中声明B类为友元类,则B类可以访问A类的私有成员,反过来却不行,这点需要注意.
+    友元函数友元类定义形式:
+        friend functionType functionName(const accessclasName&)
+        
+        friend className;
