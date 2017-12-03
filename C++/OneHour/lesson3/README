@@ -1,0 +1,12 @@
+lesson3 总结
+
+const 常量定义的方法
+constexpr 常量表达式定义的方法
+enum 枚举类型的定义及使用方法
+auto 关键字的使用,让编译器决定定义变量的类型及分配空间大小
+     使用auto关键字时要初始化变量的值
+sizeof 计算各个种类型所占用的字节大小
+
+const variabletype variablename variablevalue
+contexpr variablename {expresssion ;}
+auto variablename variablevalue
